@@ -34,8 +34,10 @@ public class FormularioAlunoActivity extends AppCompatActivity {
                 String email = campoEmail.getText().toString();
                 Aluno alunoCriado = new Aluno(nome, telefone, email);
                 dao.salva(alunoCriado);
-                startActivity(new Intent(FormularioAlunoActivity.this,
-                        ListaAlunosActivity.class));
+                // Se eu iniciar outra, vai empilhando novas activies
+               // startActivity(new Intent(FormularioAlunoActivity.this,
+                //        ListaAlunosActivity.class));
+                finish(); // Finaliza a activity atual e volta para a anterior
             }
         });
     }
