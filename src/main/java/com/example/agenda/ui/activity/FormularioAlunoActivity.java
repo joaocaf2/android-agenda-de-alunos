@@ -1,11 +1,12 @@
 package com.example.agenda.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.agenda.R;
@@ -18,6 +19,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     private EditText campoNome;
     private EditText campoTelefone;
     private EditText campoEmail;
+    private Aluno aluno;
     final AlunoDAO dao = new AlunoDAO();
 
     @Override
@@ -27,6 +29,12 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         setTitle(TITULO_APPBAR);
         AlunoDAO dao = new AlunoDAO();
         inicializacaoDosCampos();
+        Intent dados = getIntent();
+        aluno = (Aluno) dados.getSerializableExtra("aluno");
+        campoNome.setText(aluno.getNome());
+        campoEmail.setText(aluno.getEmail());
+        campoTelefone.setText(aluno.getTelefone());
+        Log.i("Id do aluno: ","Id->"+aluno.getId());
         configuraBotao();
     }
 
@@ -35,8 +43,9 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         botaoSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Aluno alunoCriado = criaAluno();
-                salva(alunoCriado);
+                preencheAluno();
+                dao.edita(aluno);
+                finish();
             }
         });
     }
@@ -55,12 +64,12 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         finish(); // Finaliza a activity atual e volta para a anterior
     }
 
-    @NonNull
-    private Aluno criaAluno() {
+    private void preencheAluno() {
         String nome = campoNome.getText().toString();
         String telefone = campoTelefone.getText().toString();
         String email = campoEmail.getText().toString();
-        Aluno alunoCriado = new Aluno(nome, telefone, email);
-        return alunoCriado;
+        aluno.setNome(nome);
+        aluno.setEmail(email);
+        aluno.setTelefone(telefone);
     }
 }
