@@ -2,6 +2,8 @@ package com.example.agenda.dao;
 
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import com.example.agenda.model.Aluno;
 
 import java.util.ArrayList;
@@ -15,29 +17,41 @@ public class AlunoDAO {
     public void salva(Aluno aluno) {
         aluno.setId(contadorDeIds);
         alunos.add(aluno);
+        atualizaIds();
+    }
+
+    private void atualizaIds() {
         contadorDeIds++;
     }
 
     public void edita(Aluno aluno) {
-        Aluno alunoEncontrado = null;
+        Aluno alunoEncontrado = buscaAlunoPeloId(aluno);
+        if (alunoEncontrado != null) {
+            int posicaoDoAluno = alunos.indexOf(alunoEncontrado);
+            alunos.set(posicaoDoAluno, aluno);
+        }
+
+    }
+
+    @Nullable
+    private Aluno buscaAlunoPeloId(Aluno aluno) {
         for (Aluno a : alunos) {
             if (a.getId() == aluno.getId()) {
-                alunoEncontrado = a;
-            }
-            if (alunoEncontrado != null) {
-                Log.i("alunoEncontrado", "Nome: " + alunoEncontrado.getId() + " Nome: " + alunoEncontrado.getNome());
-                int posicaoDoAluno = alunos.indexOf(alunoEncontrado);
-                Log.i("posicaoAluno", "posicao:" + posicaoDoAluno);
-                alunos.set(posicaoDoAluno, aluno);
-                // Se já encontrou e conseguiu editar, saio do for
-                // Pois do contrário pode ocorrer Exceção de array index
-                break;
+                return a;
             }
         }
+        return null;
     }
 
 
     public List<Aluno> todos() {
         return new ArrayList<>(alunos);
+    }
+
+    public void remove(Aluno alunoEscolhido) {
+        Aluno alunoDevolvido = buscaAlunoPeloId(alunoEscolhido);
+        if(alunoDevolvido!=null){
+            alunos.remove(alunoDevolvido);
+        }
     }
 }
