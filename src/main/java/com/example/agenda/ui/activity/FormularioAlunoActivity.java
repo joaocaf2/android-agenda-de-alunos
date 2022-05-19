@@ -30,11 +30,14 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         AlunoDAO dao = new AlunoDAO();
         inicializacaoDosCampos();
         Intent dados = getIntent();
-        aluno = (Aluno) dados.getSerializableExtra("aluno");
-        campoNome.setText(aluno.getNome());
-        campoEmail.setText(aluno.getEmail());
-        campoTelefone.setText(aluno.getTelefone());
-        Log.i("Id do aluno: ","Id->"+aluno.getId());
+        if (dados.hasExtra("aluno")) {
+            aluno = (Aluno) dados.getSerializableExtra("aluno");
+            campoNome.setText(aluno.getNome());
+            campoEmail.setText(aluno.getEmail());
+            campoTelefone.setText(aluno.getTelefone());
+        } else {
+            aluno = new Aluno();
+        }
         configuraBotao();
     }
 
@@ -44,7 +47,11 @@ public class FormularioAlunoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 preencheAluno();
-                dao.edita(aluno);
+                if (aluno.temIdValido()) {
+                    dao.edita(aluno);
+                }else{
+                    dao.salva(aluno);
+                }
                 finish();
             }
         });
@@ -56,13 +63,6 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         campoEmail = findViewById(R.id.activity_formulario_aluno_email);
     }
 
-    private void salva(Aluno alunoCriado) {
-        dao.salva(alunoCriado);
-        // Se eu iniciar outra, vai empilhando novas activies
-        // startActivity(new Intent(FormularioAlunoActivity.this,
-        //        ListaAlunosActivity.class));
-        finish(); // Finaliza a activity atual e volta para a anterior
-    }
 
     private void preencheAluno() {
         String nome = campoNome.getText().toString();
