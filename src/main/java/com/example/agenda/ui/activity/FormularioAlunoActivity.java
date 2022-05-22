@@ -4,10 +4,14 @@ import static com.example.agenda.ui.activity.ConstantesActivities.CHAVE_ALUNO;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.agenda.R;
@@ -31,7 +35,28 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         AlunoDAO dao = new AlunoDAO();
         inicializacaoDosCampos();
         carregaAluno();
-        configuraBotao();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_formulario_aluno_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.activity_formulario_aluno_menu) {
+            if (campoNome.getText().toString().isEmpty()
+                    || campoEmail.getText().toString().isEmpty()
+                    || campoTelefone.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Todos os campos são requeridos",
+                        Toast.LENGTH_LONG).show();
+            } else {
+                finalizaFormulario();
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void carregaAluno() {
@@ -52,6 +77,8 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         campoTelefone.setText(aluno.getTelefone());
     }
 
+    /*
+    Método antigo de configuração do botão
     private void configuraBotao() {
         Button botaoSalvar = findViewById(R.id.activity_formulario_aluno_botao_salvar);
         botaoSalvar.setOnClickListener(new View.OnClickListener() {
@@ -60,13 +87,13 @@ public class FormularioAlunoActivity extends AppCompatActivity {
                 finalizaFormulario();
             }
         });
-    }
+    }*/
 
     private void finalizaFormulario() {
         preencheAluno();
         if (aluno.temIdValido()) {
             dao.edita(aluno);
-        }else{
+        } else {
             dao.salva(aluno);
         }
         finish();
