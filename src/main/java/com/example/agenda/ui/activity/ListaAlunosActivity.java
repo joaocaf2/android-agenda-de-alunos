@@ -44,7 +44,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.add("Remover");
+        getMenuInflater().inflate(R.menu.activity_lista_alunos_menu, menu);
     }
 
     private void populaDadosIniciaisNaListaView() {
@@ -113,6 +113,18 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 abreFormularioModoEditaAluno(alunoEscolhido);
             }
         });
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.activity_lista_alunos_menu_remover) {
+            AdapterView.AdapterContextMenuInfo menuInfo
+                    = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            Aluno alunoEscolhido = adapter.getItem(menuInfo.position);
+            remove(alunoEscolhido);
+        }
+        return super.onContextItemSelected(item);
     }
 
     private void abreFormularioModoEditaAluno(Aluno alunoEscolhido) {
