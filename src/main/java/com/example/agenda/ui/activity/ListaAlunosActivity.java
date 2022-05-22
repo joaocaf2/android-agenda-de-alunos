@@ -48,9 +48,9 @@ public class ListaAlunosActivity extends AppCompatActivity {
     }
 
     private void populaDadosIniciaisNaListaView() {
-        dao.salva(new Aluno("Joao", "15981857694", "joao@hotmail.com"));
-        dao.salva(new Aluno("Lucas", "1598344657", "lucas@hotmail.com"));
-        dao.salva(new Aluno("Maria", "15994673827", "maria@hotmail.com"));
+            dao.salva(new Aluno("Joao", "15981857694", "joao@hotmail.com"));
+            dao.salva(new Aluno("Lucas", "1598344657", "lucas@hotmail.com"));
+            dao.salva(new Aluno("Maria", "15994673827", "maria@hotmail.com"));
     }
 
     private void configuraFabNovoAluno() {
