@@ -4,11 +4,9 @@ import static com.example.agenda.ui.activity.ConstantesActivities.CHAVE_ALUNO;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -21,8 +19,6 @@ import com.example.agenda.R;
 import com.example.agenda.dao.AlunoDAO;
 import com.example.agenda.model.Aluno;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.List;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
@@ -48,9 +44,9 @@ public class ListaAlunosActivity extends AppCompatActivity {
     }
 
     private void populaDadosIniciaisNaListaView() {
-            dao.salva(new Aluno("Joao", "15981857694", "joao@hotmail.com"));
-            dao.salva(new Aluno("Lucas", "1598344657", "lucas@hotmail.com"));
-            dao.salva(new Aluno("Maria", "15994673827", "maria@hotmail.com"));
+        dao.salva(new Aluno("Joao", "15981857694", "joao@hotmail.com"));
+        dao.salva(new Aluno("Lucas", "1598344657", "lucas@hotmail.com"));
+        dao.salva(new Aluno("Maria", "15994673827", "maria@hotmail.com"));
     }
 
     private void configuraFabNovoAluno() {

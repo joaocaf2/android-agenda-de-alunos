@@ -1,7 +1,5 @@
 package com.example.agenda.dao;
 
-import android.util.Log;
-
 import androidx.annotation.Nullable;
 
 import com.example.agenda.model.Aluno;
