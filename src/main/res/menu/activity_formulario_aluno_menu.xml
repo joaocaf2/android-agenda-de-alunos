@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="@string/Salvar"
-        app:showAsAction="always"
         android:icon="@drawable/ic_action_salvar_aluno"
-        android:id="@+id/activity_formulario_aluno_menu"/>
+        android:id="@+id/activity_formulario_aluno_menu"
+        android:showAsAction="always" />
 </menu>
