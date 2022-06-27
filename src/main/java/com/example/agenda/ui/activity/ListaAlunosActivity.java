@@ -37,7 +37,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
         setTitle(TITULO_APPBAR);
         configuraFabNovoAluno();
         configuraLista();
-        populaDadosIniciaisNaListaView();
     }
 
     @Override
@@ -46,11 +45,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.activity_lista_alunos_menu, menu);
     }
 
-    private void populaDadosIniciaisNaListaView() {
-        dao.salva(new Aluno("Joao", "15981857694", "joao@hotmail.com"));
-        dao.salva(new Aluno("Lucas", "1598344657", "lucas@hotmail.com"));
-        dao.salva(new Aluno("Maria", "15994673827", "maria@hotmail.com"));
-    }
 
     private void configuraFabNovoAluno() {
         FloatingActionButton botaoNovoAluno = findViewById(R.id.activity_lista_alunos_fab_novo_aluno);
@@ -73,9 +67,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
     }
 
     private void atualizaAlunos() {
-        adapter.clear();
-        adapter.addAll(dao.todos());
-        Log.i("Tamanho da lista: ", "->" + dao.todos().size());
+        adapter.atualiza(dao.todos());
     }
 
     private void configuraLista() {
