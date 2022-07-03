@@ -16,6 +16,7 @@ import com.example.agenda.R;
 import com.example.agenda.dao.AlunoDAO;
 import com.example.agenda.model.Aluno;
 
+@SuppressWarnings("ALL")
 public class FormularioAlunoActivity extends AppCompatActivity {
 
     private static final String TITULO_APPBAR_NOVO_ALUNO = "Novo aluno";

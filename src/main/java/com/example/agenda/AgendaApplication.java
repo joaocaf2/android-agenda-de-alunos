@@ -6,7 +6,7 @@ import com.example.agenda.dao.AlunoDAO;
 import com.example.agenda.model.Aluno;
 
 public class AgendaApplication extends Application {
-    private AlunoDAO dao = new AlunoDAO();
+    private final AlunoDAO dao = new AlunoDAO();
 
     @Override
     public void onCreate() {
