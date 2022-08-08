@@ -14,8 +14,8 @@ import com.example.agenda.ui.adapter.ListaAlunosAdapter;
 
 public class ListaAlunosView {
     private final ListaAlunosAdapter adapter;
-    private Context context;
-    private AlunoDAO dao;
+    private final Context context;
+    private final AlunoDAO dao;
 
     public void atualizaAlunos() {
         adapter.atualiza(dao.todos());

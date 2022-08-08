@@ -17,7 +17,6 @@ import com.example.agenda.R;
 import com.example.agenda.dao.AlunoDAO;
 import com.example.agenda.model.Aluno;
 import com.example.agenda.ui.ListaAlunosView;
-import com.example.agenda.ui.adapter.ListaAlunosAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ListaAlunosActivity extends AppCompatActivity {
